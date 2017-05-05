@@ -114,6 +114,12 @@ You can use nat for interface. This is supported for IPv4 alone. IPv6 deployment
           - 10.20.0.2
 ```
 
+ICMP
+====
+
+The option `icmp` allows ICMP packets to get into the firewall. This should be enabled for network 
+services to be working as per the RFCs as explained [here](https://serverfault.com/questions/702016/why-does-ip6tables-a-input-j-drop-blocks-outgoing-server-connections).
+
 IPv6 Support
 ============
 
@@ -138,6 +144,13 @@ Services and whitelists are supported under the sections `services_ipv6` and `wh
     networks:
       ips_allow:
         - 2a02:2028:773:d01:1814:28ef:e91b:70b8/64
+```
+
+Similarly, an option to allow ICMP for IPv6 was also added:
+
+```
+firewall:
+  icmpv6: True
 ```
 
 These sections are only processed if the ipv6 support is activated.
