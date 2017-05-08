@@ -153,4 +153,4 @@ firewall:
   icmpv6: True
 ```
 
-These sections are only processed if the ipv6 support is activated.
+These sections are only processed if the IPv6 support is activated.
