@@ -78,7 +78,7 @@
         iptables.set_policy:
           - table: filter
           - chain: INPUT
-          - policy: REJECT
+          - policy: DROP
           - family: ipv6
           - require:
             - iptables: iptables_allow_localhost_ipv6
