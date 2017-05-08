@@ -88,24 +88,24 @@
 
     # Allowing icmp if needed
     {%- if icmp %}
-    iptables_allow_icmp:
-      iptables.append:
-        - table: filter
-        - chain: INPUT
-        - jump: ACCEPT
-        - proto: icmp
-        - save: True
+      iptables_allow_icmp:
+        iptables.append:
+          - table: filter
+          - chain: INPUT
+          - jump: ACCEPT
+          - proto: icmp
+          - save: True
     {%- endif %}
     # Allowing icmp if needed
     {%- if icmpv6 and ipv6 %}
-    iptables_allow_icmpv6:
-      iptables.append:
-        - table: filter
-        - chain: INPUT
-        - jump: ACCEPT
-        - proto: icmpv6
-        - family: ipv6
-        - save: True
+      iptables_allow_icmpv6:
+        iptables.append:
+          - table: filter
+          - chain: INPUT
+          - jump: ACCEPT
+          - proto: icmpv6
+          - family: ipv6
+          - save: True
     {%- endif %}
 
 
