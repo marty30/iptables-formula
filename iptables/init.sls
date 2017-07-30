@@ -4,6 +4,8 @@
   {% set install = firewall.get('install', False) %}
   {% set strict_mode = firewall.get('strict', False) %}
   {% set ipv6 = firewall.get('ipv6', False) %}
+  {% set icmp = firewall.get('icmp', False) %}
+  {% set icmpv6 = firewall.get('icmpv6', False) %}
   {% set global_block_nomatch = firewall.get('block_nomatch', False) %}
   {% set packages = salt['grains.filter_by']({
     'Debian': ['iptables', 'iptables-persistent'],
@@ -83,6 +85,30 @@
             - iptables: iptables_allow_established_ipv6
       {%- endif %}
     {%- endif %}
+
+    # Allowing icmp if needed
+    {%- if icmp %}
+      iptables_allow_icmp:
+        iptables.append:
+          - table: filter
+          - chain: INPUT
+          - jump: ACCEPT
+          - proto: icmp
+          - save: True
+    {%- endif %}
+    # Allowing icmp if needed
+    {%- if icmpv6 and ipv6 %}
+      iptables_allow_icmpv6:
+        iptables.append:
+          - table: filter
+          - chain: INPUT
+          - jump: ACCEPT
+          - proto: icmpv6
+          - family: ipv6
+          - save: True
+    {%- endif %}
+
+
 
   # Generate ipsets for all services that we have information about
   {%- for service_name, service_details in firewall.get('services', {}).items() %}  

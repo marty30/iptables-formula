@@ -3,6 +3,8 @@ firewall:
   enabled: True
   strict: True
   ipv6: True
+  icmp: True
+  icmpv6: True
   services:
     ssh:
       block_nomatch: False
